@@ -1,0 +1,39 @@
+public class PangramChecker {
+    public static void main(String[] args) {
+        String input = "The quick brown fox jumps over the lazy dog";
+        
+        if (isPangram(input)) {
+            System.out.println("The input is a pangram.");
+        } else {
+            System.out.println("The input is not a pangram.");
+        }
+    }
+
+    public static boolean isPangram(String input) {
+        // Convert the input to lowercase for case-insensitivity
+        String lowerCaseInput = input.toLowerCase();
+
+        // Define an array to mark the presence of each alphabet
+        boolean[] alphabetPresent = new boolean[26];
+
+        // Iterate through the characters in the input
+        for (int i = 0; i < lowerCaseInput.length(); i++) {
+            char currentChar = lowerCaseInput.charAt(i);
+
+            // Check if the character is an English alphabet
+            if (Character.isLetter(currentChar)) {
+                // Mark the presence of the alphabet in the array
+                alphabetPresent[currentChar - 'a'] = true;
+            }
+        }
+
+        // Check if all alphabets are present in the array
+        for (boolean isPresent : alphabetPresent) {
+            if (!isPresent) {
+                return false; // If any alphabet is missing, it's not a pangram
+            }
+        }
+
+        return true; // All alphabets are present, it's a pangram
+    }
+}
